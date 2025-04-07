@@ -9,36 +9,26 @@ The `@pandacss/no-physical-properties` ESLint rule is designed to encourage the 
 The following code should trigger ESLint errors but doesn't:
 
 ```tsx
-const heading = cva({
-  base: {
-    fontWeight: "strong",
-    lineHeight: "m",
-  },
-  variants: {
-    align: {
-      // This should trigger an error suggesting to use "text-align: start" instead
-      left: {
-        textAlign: "left",
-        textWrap: "wrap",
-      },
-      center: {
-        textAlign: "center",
-        textWrap: "balance",
-        wordBreak: "[auto-phrase]",
-      },
-      // This should trigger an error suggesting to use "text-align: end" instead
-      right: {
-        textAlign: "right",
-        textWrap: "wrap",
-      },
-    },
-  },
-  defaultVariants: {
-    size: "2xl",
-    align: "left",
-    weight: "strong",
-  },
-});
+import { css } from "../../styled-system/css";
+export default function Home() {
+  return (
+    <main>
+      <p className={css({
+        textAlign: "left" // This should trigger an ESLint error
+      })}>left text</p>
+      <p className={css({
+        textAlign: "right" // This should trigger an ESLint error
+      })}>right text</p>
+      <p className={css({
+        textAlign: "start" // This is valid
+      })}>start text</p>
+      <p className={css({
+        textAlign: "end"  // This is valid
+      })}>end text</p>
+    </main>
+  );
+}
+
 ```
 
 ## How to Reproduce
