@@ -1,0 +1,12 @@
+{
+  "plugins": [
+    "@pandacss"
+  ],
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:@pandacss/recommended"
+  ],
+  "rules": {
+    "@pandacss/no-physical-properties": "error"
+  }
+}

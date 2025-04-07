@@ -1,0 +1,28 @@
+{
+  "name": "no-invalid-nesting-test",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "prepare": "panda codegen",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "14.2.8",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@pandacss/dev": "^0.45.2",
+    "@pandacss/eslint-plugin": "^0.1.9",
+    "@types/node": "^22.5.4",
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.2.8",
+    "typescript": "^5.5.4"
+  },
+  "packageManager": "pnpm@9.9.0+sha256.7a4261e50d9a44d9240baf6c9d6e10089dcf0a79d0007f2a26985a6927324177"
+}
