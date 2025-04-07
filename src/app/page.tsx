@@ -1,16 +1,19 @@
-import styles from "./page.module.css";
-import { Heading } from "@/app/Heading";
 import { css } from "../../styled-system/css";
-
 export default function Home() {
-    return (
-        <main className={styles.main}>
-            <Heading size="2xs">
-                Title
-            </Heading>
-            <p className={css({
-                fontSize: "2xs"
-            })}>Test text</p>
-        </main>
-    );
+  return (
+    <main>
+      <p className={css({
+        textAlign: "left"
+      })}>left text</p>
+      <p className={css({
+        textAlign: "right"
+      })}>right text</p>
+      <p className={css({
+        textAlign: "start"
+      })}>start text</p>
+      <p className={css({
+        textAlign: "end"
+      })}>end text</p>
+    </main>
+  );
 }
