@@ -1,15 +1,12 @@
-# `@pandacss/no-physical-properties` false positive
+# `@pandacss/no-physical-properties` textAlign Issue
 
-## usage
+This repository demonstrates an issue with the `@pandacss/no-physical-properties` ESLint rule, which fails to detect `textAlign: "left"` and `textAlign: "right"` as physical properties that should be replaced with logical properties.
 
-```bash
-pnpm install
-pnpm run lint
-./src/app/Heading.tsx
-51:7  Error: Use logical property of `left` instead. Prefer `insetInlineStart`  @pandacss/no-physical-properties
-60:7  Error: Use logical property of `right` instead. Prefer `insetInlineEnd`  @pandacss/no-physical-properties
+## Issue Description
 
-```
+The `@pandacss/no-physical-properties` ESLint rule is designed to encourage the use of logical properties instead of physical properties. However, in the current version, it does not detect `textAlign: "left"` or `textAlign: "right"` as physical properties.
+
+The following code should trigger ESLint errors but doesn't:
 
 ```tsx
 const heading = cva({
@@ -18,28 +15,8 @@ const heading = cva({
     lineHeight: "m",
   },
   variants: {
-    size: {
-      "2xl": {
-        fontSize: "2xl",
-      },
-      xl: {
-        fontSize: "xl",
-      },
-      l: {
-        fontSize: "l",
-      },
-      m: {
-        fontSize: "m",
-      },
-      s: {
-        fontSize: "s",
-      },
-      xs: {
-        fontSize: "xs",
-      },
-    },
     align: {
-      // false positive lint error is here
+      // This should trigger an error suggesting to use "text-align: start" instead
       left: {
         textAlign: "left",
         textWrap: "wrap",
@@ -49,18 +26,10 @@ const heading = cva({
         textWrap: "balance",
         wordBreak: "[auto-phrase]",
       },
-      // false positive lint error is here
+      // This should trigger an error suggesting to use "text-align: end" instead
       right: {
         textAlign: "right",
         textWrap: "wrap",
-      },
-    },
-    weight: {
-      strong: {
-        fontWeight: "strong",
-      },
-      regular: {
-        fontWeight: "regular",
       },
     },
   },
@@ -72,9 +41,28 @@ const heading = cva({
 });
 ```
 
-Is this `&` character really necessary? I think it's a false positive?
+## How to Reproduce
 
-----
+```bash
+# Install dependencies
+pnpm install
+
+# Run ESLint
+pnpm run lint
+```
+
+With the latest versions (@pandacss/eslint-plugin@0.2.8, @pandacss/dev@0.53.3), no ESLint errors are reported.
+
+## Proper Logical Property Alternatives
+
+According to MDN documentation, the appropriate conversion from physical properties to logical properties is:
+
+- `textAlign: "left"` → `textAlign: "start"` (aligns with the start of the content)
+- `textAlign: "right"` → `textAlign: "end"` (aligns with the end of the content)
+
+Using logical properties ensures proper display even when text direction changes (e.g., RTL).
+
+Reference: [MDN Web Docs - text-align](https://developer.mozilla.org/en-US/docs/Web/CSS/text-align)
 
 ## Getting Started
 
